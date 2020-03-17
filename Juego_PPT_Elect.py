@@ -1,7 +1,11 @@
 import sys, pygame
 from pygame.locals import *
-
+from random import randint
+from Clases import Oponente
+from Clases import Jugador
 #----variables-globales-----
+alto=550
+ancho=750
 blanco=(230,230,230)
 amarillo=(255,255,0)
 rojo=(255,0,0)
@@ -10,15 +14,14 @@ papel = pygame.image.load("Imagenes\paper-line.png")
 piedra = pygame.image.load("Imagenes\piedra-de-grava-vexels.png")
 #--------------Datos-de-ventana-mensajaes------------
 pygame.init()
-#ventana.fill()
-ventana = pygame.display.set_mode((750,550))
+ventana = pygame.display.set_mode((ancho,alto))
 pygame.display.set_caption("Ventanita")
+ventana.fill((0,180,30))
 
 Fuente =pygame.font.SysFont("Arial",20)
 Bienvenida= Fuente.render("Bienvenido a Piedra, Papel y Tijera",10,amarillo)
 Indicaciones= Fuente.render("Elija una de las 3 Opciones:",0,blanco)
-jugadorTxt= Fuente.render("Jugador:",0,blanco)
-OponenteTxt= Fuente.render("Oponente:",0,blanco)
+
 #-----Funciones-------------------
 def Impresor():
      ventana.blit(Bienvenida,(20,25))
@@ -27,30 +30,25 @@ def Impresor():
      ventana.blit(papel,(180,90))
      ventana.blit(tijera,(320,90))
      
-     #ventana.blit(jugadorTxt,(20,265))
-     #ventana.blit(OponenteTxt,(320,265))
-class oponente(pygame.sprite.Sprite):
+class Cursor(pygame.Rect):
      def __init__(self):
-          print "hi"
-
-class Jugador(pygame.sprite.Sprite):
-     def __init__(self):
-          
-          pass
+          pygame.Rect.__init__(self,0,0,1,1)
+     def update(self):
+          self.left,self.top= pygame.mouse.get_pos()
 #==========================================
 def PPTGame():
-     
-     while True:
-          mouse= pygame.mouse.get_pos()
-          # posibles entradas del teclado
+     #-----objetos---------------
+     oponente= Oponente()
+     cursor= Cursor()
+     jugador= Jugador(piedra,papel,tijera)
+     while True:          
+          cursor.update() 
           for event in pygame.event.get():
                if event.type ==pygame.MOUSEBUTTONDOWN:
-                    print "clic"
-                         
+                    jugador.seleccion(cursor,ventana,oponente)
                if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-          
           Impresor()
           pygame.display.update()
 PPTGame()
