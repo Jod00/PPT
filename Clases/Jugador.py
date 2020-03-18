@@ -1,10 +1,13 @@
 import pygame
-
+import Oponente
 class Jugador(pygame.sprite.Sprite):
      def __init__(self,piedra,papel,tijera,x=70,y=90):
           self.piedraA =piedra
           self.papelA=papel
           self.tijeraA=tijera
+
+          self.fin= True
+          
           self.blanco=(230,230,230)
           self.Fuente =pygame.font.SysFont("Arial",20)
           
@@ -14,8 +17,8 @@ class Jugador(pygame.sprite.Sprite):
           self.Perdio= self.Fuente.render("Lo siento Has Perdido :(",14,(255,255,0))
           self.Empato= self.Fuente.render("Empate",14,(255,255,0))
           
-          self.FondoMensaje = pygame.Rect(375,275,365,45)
-
+          self.FondoMensaje = pygame.Rect(200,200,300,45)
+          
           self.rectpi =self.piedraA.get_rect()
           self.rectp =self.papelA.get_rect()
           self.rectt =self.tijeraA.get_rect()
@@ -48,38 +51,44 @@ class Jugador(pygame.sprite.Sprite):
                oponente.Elecciones(3,ventana)
 
      def ganador(self,Eleccion,eleccionOponente,ventana):
-          print (Eleccion)
           
           if (Eleccion==1 and eleccionOponente==2):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Perdio,(375,275))
-               
+               ventana.blit(self.Perdio,(210,200))
+               self.fin = False
+          
           elif(Eleccion==2 and eleccionOponente==3):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Perdio,(375,275))
-               
+               ventana.blit(self.Perdio,(210,200))
+               self.fin = False
                
           elif(Eleccion==1 and eleccionOponente==3):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Gano,(375,275))
-               
-               
+               ventana.blit(self.Gano,(210,200))
+               self.fin = False
+          
           elif(Eleccion==2 and eleccionOponente==1):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Gano,(375,275))
-               
+               ventana.blit(self.Gano,(210,200))
+               self.fin = False
                
           elif(Eleccion==3 and eleccionOponente==1):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Perdio,(375,275))
+               ventana.blit(self.Perdio,(210,200))
+               self.fin = False
           
           elif(Eleccion==3 and eleccionOponente==2):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Gano,(375,275))
+               ventana.blit(self.Gano,(210,200))
+               self.fin = False
                
           elif(Eleccion==eleccionOponente):
                pygame.draw.rect(ventana,(0,0,0),self.FondoMensaje)
-               ventana.blit(self.Empato,(375,275))
+               ventana.blit(self.Empato,(210,200))
+               self.fin = False
+               
+
+               
 
           
      

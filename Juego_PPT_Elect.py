@@ -42,14 +42,21 @@ def PPTGame():
      cursor= Cursor()
      jugador= Jugador(piedra,papel,tijera)
      oponente= Oponente(jugador)
+     enJuego= True
+     Impresor()
      while True:          
-          cursor.update() 
+          cursor.update()
           for event in pygame.event.get():
                if event.type ==pygame.MOUSEBUTTONDOWN:
                     jugador.seleccion(cursor,ventana,oponente)
+               
                if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-          Impresor()
+                    
           pygame.display.update()
+          if jugador.fin==False:
+               time.sleep(2)
+               break
+
 PPTGame()

@@ -1,7 +1,6 @@
 import sys, pygame
 from pygame.locals import *
 from random import randint
-import time
 
 class Oponente(pygame.sprite.Sprite):
      def __init__(self,jugador):
@@ -22,4 +21,3 @@ class Oponente(pygame.sprite.Sprite):
           self.JugadorMano = Eleccion
           self.Player.ganador(self.JugadorMano,self.EleccionOponente,ventana)
                
-          
