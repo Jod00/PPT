@@ -1,5 +1,6 @@
 import sys, pygame
 from pygame.locals import *
+import time
 from random import randint
 from Clases import Oponente
 from Clases import Jugador
@@ -29,7 +30,7 @@ def Impresor():
      ventana.blit(piedra,(70,90))
      ventana.blit(papel,(180,90))
      ventana.blit(tijera,(320,90))
-     
+          
 class Cursor(pygame.Rect):
      def __init__(self):
           pygame.Rect.__init__(self,0,0,1,1)
@@ -38,9 +39,9 @@ class Cursor(pygame.Rect):
 #==========================================
 def PPTGame():
      #-----objetos---------------
-     oponente= Oponente()
      cursor= Cursor()
      jugador= Jugador(piedra,papel,tijera)
+     oponente= Oponente(jugador)
      while True:          
           cursor.update() 
           for event in pygame.event.get():
