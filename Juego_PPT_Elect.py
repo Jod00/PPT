@@ -19,10 +19,11 @@ ventana = pygame.display.set_mode((ancho,alto))
 pygame.display.set_caption("Ventanita")
 ventana.fill((0,180,30))
 
+FondoMensaje = pygame.Rect(200,250,330,35)
 Fuente =pygame.font.SysFont("Arial",20)
 Bienvenida= Fuente.render("Bienvenido a Piedra, Papel y Tijera",10,amarillo)
 Indicaciones= Fuente.render("Elija una de las 3 Opciones:",0,blanco)
-
+UltimoBoton= Fuente.render("Presiona cualquier Boton para salir",8,(255,255,0))
 #-----Funciones-------------------
 def Impresor():
      ventana.blit(Bienvenida,(20,25))
@@ -30,7 +31,7 @@ def Impresor():
      ventana.blit(piedra,(70,90))
      ventana.blit(papel,(180,90))
      ventana.blit(tijera,(320,90))
-          
+     
 class Cursor(pygame.Rect):
      def __init__(self):
           pygame.Rect.__init__(self,0,0,1,1)
@@ -56,7 +57,15 @@ def PPTGame():
                     
           pygame.display.update()
           if jugador.fin==False:
-               time.sleep(2)
-               break
-
+               for event in pygame.event.get():
+                    pygame.draw.rect(ventana,(0,0,0),FondoMensaje)
+                    ventana.blit(UltimoBoton,(210,250))
+                    if event.type ==QUIT:
+                         pygame.quit()
+                         sys.exit()
+                    elif event.type == pygame.KEYDOWN:
+                         
+                         time.sleep(1)
+                         pygame.quit()
+                         sys.exit()
 PPTGame()
